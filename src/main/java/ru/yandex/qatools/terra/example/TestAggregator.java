@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.usertest;
+package ru.yandex.qatools.terra.example;
 
 import ru.yandex.qatools.fsm.annotations.FSM;
 import ru.yandex.qatools.fsm.annotations.OnTransit;
@@ -8,7 +8,7 @@ import ru.yandex.qatools.terra.api.ClientMessageSender;
 import ru.yandex.qatools.terra.api.annotations.Aggregate;
 import ru.yandex.qatools.terra.api.annotations.ClientSender;
 
-import static ru.yandex.qatools.terra.usertest.SpringFacade.getContext;
+import static ru.yandex.qatools.terra.example.SpringFacade.getContext;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)

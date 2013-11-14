@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.usertest;
+package ru.yandex.qatools.terra.example;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)

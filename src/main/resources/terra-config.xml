@@ -3,11 +3,11 @@
     <source>
         <artifact>test</artifact>
         <plugin id="test-processor">
-            <processor>ru.yandex.qatools.terra.usertest.TestProcessor</processor>
+            <processor>ru.yandex.qatools.terra.example.TestProcessor</processor>
         </plugin>
         <plugin id="test-plugin" source="test-processor">
-            <aggregator>ru.yandex.qatools.terra.usertest.TestAggregator</aggregator>
-            <resource>ru.yandex.qatools.terra.usertest.TestResource</resource>
+            <aggregator>ru.yandex.qatools.terra.example.TestAggregator</aggregator>
+            <resource>ru.yandex.qatools.terra.example.TestResource</resource>
         </plugin>
     </source>
 </plugins-config>

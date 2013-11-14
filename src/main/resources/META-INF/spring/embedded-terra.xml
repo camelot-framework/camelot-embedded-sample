@@ -16,19 +16,21 @@
             http://activemq.apache.org/schema/core/activemq-core.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="ru.yandex.qatools.terra.usertest"/>
+    <context:component-scan base-package="ru.yandex.qatools.terra.example"/>
+
+
+    <!--
+    Embedded ActiveMQ
+    -->
     <amq:broker useJmx="false" persistent="false">
         <amq:transportConnectors>
             <amq:transportConnector uri="tcp://localhost:61619"/>
         </amq:transportConnectors>
     </amq:broker>
-
     <amq:connectionFactory id="jmsFactory" brokerURL="vm://localhost:61619"/>
-
     <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="failover:(tcp://localhost:61619)?randomize=false"/>
     </bean>
-
     <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
           depends-on="testContext" init-method="start" destroy-method="stop">
         <property name="timeBetweenExpirationCheckMillis" value="0"/>
@@ -37,18 +39,19 @@
         <property name="maximumActiveSessionPerConnection" value="500"/>
         <property name="connectionFactory" ref="jmsConnectionFactory"/>
     </bean>
-
     <bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
         <property name="connectionFactory" ref="pooledConnectionFactory"/>
         <property name="transacted" value="false"/>
         <property name="testConnectionOnStartup" value="true"/>
     </bean>
-
     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
         <property name="configuration" ref="jmsConfig"/>
         <property name="testConnectionOnStartup" value="true"/>
     </bean>
 
+    <!--
+    Embedded Hazelcast
+    -->
     <hz:hazelcast id="hazelcastInstance">
         <hz:config>
             <hz:group name="test" password="test-pass"/>
@@ -79,12 +82,12 @@
         </hz:config>
     </hz:hazelcast>
 
-    <!-- Beans -->
+    <!--
+    Embedded Terra
+    -->
     <bean id="pluginLoader" class="ru.yandex.qatools.terra.core.SameClasspathPluginLoader"/>
-
     <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/>
     <bean id="scheduler" factory-bean="schedulerFactory" factory-method="getScheduler"/>
-
     <bean id="buildersFactory" class="ru.yandex.qatools.terra.core.builders.BuildersFactoryImpl"/>
     <bean id="engine" class="ru.yandex.qatools.terra.core.ProcessingEngineImpl" init-method="init">
         <constructor-arg name="configsLocation" value="classpath:/terra-config.xml"/>
@@ -97,7 +100,7 @@
         <constructor-arg name="outputQueue" value="direct:plugin.stop"/>
     </bean>
 
-    <!-- Routes -->
+    <!-- Camel context -->
     <camelContext id="testContext" xmlns="http://camel.apache.org/schema/spring">
         <jmxAgent id="agent" disabled="true"/>
         <threadPoolProfile id="terraDefaultProfile" defaultProfile="true" maxPoolSize="64"/>

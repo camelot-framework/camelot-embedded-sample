@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.usertest;
+package ru.yandex.qatools.terra.example;
 
 import ru.yandex.qatools.clay.annotations.Header;
 

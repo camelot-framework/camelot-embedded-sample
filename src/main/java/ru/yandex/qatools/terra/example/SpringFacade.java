@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.usertest;
+package ru.yandex.qatools.terra.example;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
