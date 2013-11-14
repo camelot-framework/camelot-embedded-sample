@@ -18,7 +18,7 @@ import static ru.yandex.qatools.terra.api.Constants.Headers.UUID;
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)
  */
 @RunWith(TerraTestRunner.class)
-@UseCustomContext({"classpath:/META-INF/spring/embedded-terra.xml"})
+@UseCustomContext("classpath:/META-INF/spring/embedded-terra.xml")
 public class TestAggregatorTest {
 
     @PluginMock("test-plugin")

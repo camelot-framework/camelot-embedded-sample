@@ -32,8 +32,6 @@ public class TestAggregator {
 
         if (getContext() == null) {
             throw new RuntimeException("Spring context cannot be null!");
-        } else {
-            getContext().getBean(SpringFacade.class);
         }
     }
 }
