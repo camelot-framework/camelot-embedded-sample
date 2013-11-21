@@ -36,6 +36,9 @@ public class TestAggregatorTest {
     @ClientSenderMock("test-plugin")
     ClientMessageSender sender;
 
+    @ClientSenderMock(value = "test-plugin", topic = "test")
+    ClientMessageSender senderTopic;
+
     @Autowired
     SpringFacade someComponent;
 
@@ -45,6 +48,7 @@ public class TestAggregatorTest {
         verify(prcMock, timeout(3000)).onNodeEvent(eq("test"));
         verify(aggMock, timeout(3000)).onNodeEvent(any(TestState.class), eq("testprocessed"));
         verify(sender, timeout(3000)).send(any(TestState.class));
+        verify(senderTopic, timeout(3000)).send(eq("testprocessed"));
         TestState state = aggStates.get(TestState.class, "uuid");
         assertNotNull(state);
         assertEquals("testprocessed", state.message);

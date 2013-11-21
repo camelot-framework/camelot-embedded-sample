@@ -19,9 +19,7 @@
     <context:component-scan base-package="ru.yandex.qatools.terra.example"/>
 
 
-    <!--
-    Embedded ActiveMQ
-    -->
+    <!-- Embedded ActiveMQ -->
     <amq:broker useJmx="false" persistent="false">
         <amq:transportConnectors>
             <amq:transportConnector uri="tcp://localhost:61619"/>
@@ -49,9 +47,7 @@
         <property name="testConnectionOnStartup" value="true"/>
     </bean>
 
-    <!--
-    Embedded Hazelcast
-    -->
+    <!-- Embedded Hazelcast -->
     <hz:hazelcast id="hazelcastInstance">
         <hz:config>
             <hz:group name="test" password="test-pass"/>
@@ -82,22 +78,23 @@
         </hz:config>
     </hz:hazelcast>
 
-    <!--
-    Embedded Terra
-    -->
-    <bean id="pluginLoader" class="ru.yandex.qatools.terra.core.SameClasspathPluginLoader"/>
+    <!-- Embedded Terra -->
     <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/>
-    <bean id="scheduler" factory-bean="schedulerFactory" factory-method="getScheduler"/>
-    <bean id="buildersFactory" class="ru.yandex.qatools.terra.core.builders.BuildersFactoryImpl"/>
     <bean id="engine" class="ru.yandex.qatools.terra.core.ProcessingEngineImpl" init-method="init">
         <constructor-arg name="configsLocation" value="classpath*:/terra-config.xml"/>
         <constructor-arg name="camelContext" ref="testContext"/>
         <constructor-arg name="hazelcastInstance" ref="hazelcastInstance"/>
-        <constructor-arg name="pluginLoader" ref="pluginLoader"/>
-        <constructor-arg name="scheduler" ref="scheduler"/>
-        <constructor-arg name="buildersFactory" ref="buildersFactory"/>
-        <constructor-arg name="inputQueue" value="ref:events.input"/>
-        <constructor-arg name="outputQueue" value="direct:plugin.stop"/>
+        <constructor-arg name="pluginLoader">
+            <bean class="ru.yandex.qatools.terra.core.SameClasspathPluginLoader"/>
+        </constructor-arg>
+        <constructor-arg name="scheduler">
+            <bean factory-bean="schedulerFactory" factory-method="getScheduler"/>
+        </constructor-arg>
+        <constructor-arg name="buildersFactory">
+            <bean class="ru.yandex.qatools.terra.core.builders.BuildersFactoryImpl"/>
+        </constructor-arg>
+        <constructor-arg name="inputUri" value="ref:events.input"/>
+        <constructor-arg name="outputUri" value="direct:plugin.stop"/>
     </bean>
 
     <!-- Camel context -->

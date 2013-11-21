@@ -7,15 +7,20 @@ import ru.yandex.qatools.fsm.annotations.Transitions;
 import ru.yandex.qatools.terra.api.ClientMessageSender;
 import ru.yandex.qatools.terra.api.annotations.Aggregate;
 import ru.yandex.qatools.terra.api.annotations.ClientSender;
+import ru.yandex.qatools.terra.api.annotations.Filter;
 
 import static ru.yandex.qatools.terra.example.SpringFacade.getContext;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)
  */
+@Filter(instanceOf = {String.class, Float.class})
 @Aggregate(clazz = Expressions.class, method = Expressions.BY_UUID)
 @FSM(start = TestState.class)
-@Transitions({@Transit(on = String.class), @Transit(stop = true, on = Float.class)})
+@Transitions({
+        @Transit(on = String.class),
+        @Transit(stop = true, on = Float.class)
+})
 public class TestAggregator {
 
     @ClientSender
@@ -28,7 +33,7 @@ public class TestAggregator {
     public void onNodeEvent(TestState state, String event) {
         state.message = event;
         sender.send(state);
-        senderTopic.send(state);
+        senderTopic.send(event);
 
         if (getContext() == null) {
             throw new RuntimeException("Spring context cannot be null!");
