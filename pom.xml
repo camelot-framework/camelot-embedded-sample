@@ -19,6 +19,16 @@
             <version>${terra.version}</version>
         </dependency>
 
+        <!--
+            Т.к. мы использовали classpath*:/terra-config.xml в качестве configsLocation, то
+            подключения зависимости достаточно, чтобы добавить плагины к проекту:
+        -->
+        <dependency>
+            <groupId>ru.yandex.qatools.terra</groupId>
+            <artifactId>terra-plugin-monitoring</artifactId>
+            <version>1.4-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>ru.yandex.qatools</groupId>
             <artifactId>terra-test</artifactId>
@@ -45,6 +55,25 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

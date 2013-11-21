@@ -90,7 +90,7 @@
     <bean id="scheduler" factory-bean="schedulerFactory" factory-method="getScheduler"/>
     <bean id="buildersFactory" class="ru.yandex.qatools.terra.core.builders.BuildersFactoryImpl"/>
     <bean id="engine" class="ru.yandex.qatools.terra.core.ProcessingEngineImpl" init-method="init">
-        <constructor-arg name="configsLocation" value="classpath:/terra-config.xml"/>
+        <constructor-arg name="configsLocation" value="classpath*:/terra-config.xml"/>
         <constructor-arg name="camelContext" ref="testContext"/>
         <constructor-arg name="hazelcastInstance" ref="hazelcastInstance"/>
         <constructor-arg name="pluginLoader" ref="pluginLoader"/>
