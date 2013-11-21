@@ -7,25 +7,45 @@
     <groupId>terra-embedded-example</groupId>
     <artifactId>terra-embedded-example</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <java.version>1.7</java.version>
+        <terra.version>1.1-SNAPSHOT</terra.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>ru.yandex.qatools</groupId>
             <artifactId>terra-core</artifactId>
-            <version>1.1-SNAPSHOT</version>
-            <classifier>classes</classifier>
+            <version>${terra.version}</version>
         </dependency>
 
         <dependency>
             <groupId>ru.yandex.qatools</groupId>
             <artifactId>terra-test</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>${terra.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>ru.yandex.qatools</groupId>
+                <artifactId>terra-test-maven-plugin</artifactId>
+                <version>${terra.version}</version>
+                <configuration>
+                    <runForked>true</runForked>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
