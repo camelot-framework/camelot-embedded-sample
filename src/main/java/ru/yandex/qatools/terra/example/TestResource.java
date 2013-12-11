@@ -18,9 +18,9 @@ public class TestResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Set<Object> getStates() {
-        Set<Object> browsers = new HashSet<Object>();
-        for (String key : repo.keys()) {
-            browsers.add(repo.get(key));
+        Set<Object> browsers = new HashSet<>();
+        for (Object key : repo.keys()) {
+            browsers.add(repo.get((String) key));
         }
         return browsers;
     }

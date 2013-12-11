@@ -7,7 +7,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
             http://www.hazelcast.com/schema/spring
-            http://www.hazelcast.com/schema/spring/hazelcast-spring-2.1.xsd
+            http://www.hazelcast.com/schema/spring/hazelcast-spring-3.1.xsd
             http://camel.apache.org/schema/spring
             http://camel.apache.org/schema/spring/camel-spring.xsd
             http://www.springframework.org/schema/context
@@ -72,7 +72,6 @@
                     max-size="0"
                     eviction-percentage="30"
                     read-backup-data="true"
-                    cache-value="true"
                     eviction-policy="NONE"
                     merge-policy="hz.ADD_NEW_ENTRY"/>
         </hz:config>
