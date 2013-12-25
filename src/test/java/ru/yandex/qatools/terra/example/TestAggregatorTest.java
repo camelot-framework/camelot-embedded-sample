@@ -2,7 +2,6 @@ package ru.yandex.qatools.terra.example;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.yandex.qatools.terra.api.ClientMessageSender;
 import ru.yandex.qatools.terra.test.*;
 
@@ -39,9 +38,6 @@ public class TestAggregatorTest {
     @ClientSenderMock(id = "test-plugin", topic = "test")
     ClientMessageSender senderTopic;
 
-    @Autowired
-    SpringFacade someComponent;
-
     @Test
     public void testRoute() throws Exception {
         helper.send("test", UUID, "uuid");
@@ -52,6 +48,5 @@ public class TestAggregatorTest {
         TestState state = aggStates.get(TestState.class, "uuid");
         assertNotNull(state);
         assertEquals("testprocessed", state.message);
-        assertNotNull(someComponent);
     }
 }

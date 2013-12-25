@@ -1,5 +1,7 @@
 package ru.yandex.qatools.terra.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import ru.yandex.qatools.fsm.annotations.FSM;
 import ru.yandex.qatools.fsm.annotations.OnTransit;
 import ru.yandex.qatools.fsm.annotations.Transit;
@@ -8,8 +10,6 @@ import ru.yandex.qatools.terra.api.ClientMessageSender;
 import ru.yandex.qatools.terra.api.annotations.Aggregate;
 import ru.yandex.qatools.terra.api.annotations.ClientSender;
 import ru.yandex.qatools.terra.api.annotations.Filter;
-
-import static ru.yandex.qatools.terra.example.SpringFacade.getContext;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)
@@ -23,6 +23,9 @@ import static ru.yandex.qatools.terra.example.SpringFacade.getContext;
 })
 public class TestAggregator {
 
+    @Autowired
+    ApplicationContext context;
+
     @ClientSender
     ClientMessageSender sender;
 
@@ -35,7 +38,7 @@ public class TestAggregator {
         sender.send(state);
         senderTopic.send(event);
 
-        if (getContext() == null) {
+        if (context == null) {
             throw new RuntimeException("Spring context cannot be null!");
         }
     }
