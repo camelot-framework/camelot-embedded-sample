@@ -89,9 +89,6 @@
         <constructor-arg name="scheduler">
             <bean factory-bean="schedulerFactory" factory-method="getScheduler"/>
         </constructor-arg>
-        <constructor-arg name="buildersFactory">
-            <bean class="ru.yandex.qatools.terra.core.builders.BuildersFactoryImpl"/>
-        </constructor-arg>
         <constructor-arg name="inputUri" value="ref:events.input"/>
         <constructor-arg name="outputUri" value="direct:plugin.stop"/>
     </bean>

@@ -21,22 +21,22 @@ import static ru.yandex.qatools.terra.api.Constants.Headers.UUID;
 @UseCustomContext("classpath:/META-INF/spring/embedded-terra.xml")
 public class TestAggregatorTest {
 
-    @PluginMock("test-plugin")
+    @PluginMock(id = "test-plugin")
     TestAggregator aggMock;
 
-    @PluginMock("test-processor")
+    @PluginMock(id = "test-processor")
     TestProcessor prcMock;
 
     @Helper
     TestHelper helper;
 
-    @AggregatorState("test-plugin")
+    @AggregatorState(id = "test-plugin")
     AggregatorStateStorage aggStates;
 
-    @ClientSenderMock("test-plugin")
+    @ClientSenderMock(id = "test-plugin")
     ClientMessageSender sender;
 
-    @ClientSenderMock(value = "test-plugin", topic = "test")
+    @ClientSenderMock(id = "test-plugin", topic = "test")
     ClientMessageSender senderTopic;
 
     @Autowired
