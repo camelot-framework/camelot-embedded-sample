@@ -82,7 +82,6 @@
     <bean id="engine" class="ru.yandex.qatools.terra.core.ProcessingEngineImpl" init-method="init">
         <constructor-arg name="configsLocation" value="classpath*:/terra-config.xml"/>
         <constructor-arg name="camelContext" ref="testContext"/>
-        <constructor-arg name="hazelcastInstance" ref="hazelcastInstance"/>
         <constructor-arg name="pluginLoader">
             <bean class="ru.yandex.qatools.terra.core.SameClasspathPluginLoader"/>
         </constructor-arg>
@@ -93,6 +92,12 @@
         <constructor-arg name="outputUri" value="direct:plugin.stop"/>
         <property name="contextInjector">
             <bean class="ru.yandex.qatools.terra.example.SpringContextInjector"/>
+        </property>
+        <property name="repositoryBuilder">
+            <bean class="ru.yandex.qatools.terra.core.builders.HazelcastAggregationRepositoryBuilder">
+                <constructor-arg name="hazelcastInstance" ref="hazelcastInstance"/>
+                <constructor-arg name="camelContext" ref="testContext"/>
+            </bean>
         </property>
     </bean>
 
