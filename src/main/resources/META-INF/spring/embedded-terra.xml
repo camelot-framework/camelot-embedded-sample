@@ -93,10 +93,9 @@
         <property name="contextInjector">
             <bean class="ru.yandex.qatools.terra.example.SpringContextInjector"/>
         </property>
-        <property name="repositoryBuilder">
-            <bean class="ru.yandex.qatools.terra.core.builders.HazelcastAggregationRepositoryBuilder">
+        <property name="buildersFactory">
+            <bean class="ru.yandex.qatools.terra.core.builders.BuildersFactoryWithHazelcastImpl">
                 <constructor-arg name="hazelcastInstance" ref="hazelcastInstance"/>
-                <constructor-arg name="camelContext" ref="testContext"/>
             </bean>
         </property>
     </bean>
