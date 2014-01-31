@@ -91,7 +91,7 @@
         <constructor-arg name="inputUri" value="ref:events.input"/>
         <constructor-arg name="outputUri" value="direct:plugin.stop"/>
         <property name="contextInjector">
-            <bean class="ru.yandex.qatools.terra.example.SpringContextInjector"/>
+            <bean class="ru.yandex.qatools.terra.core.SpringContextInjector"/>
         </property>
         <property name="buildersFactory">
             <bean class="ru.yandex.qatools.terra.core.builders.BuildersFactoryWithHazelcastImpl">
