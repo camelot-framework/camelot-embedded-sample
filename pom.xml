@@ -25,8 +25,8 @@
         -->
         <dependency>
             <groupId>ru.yandex.qatools.terra</groupId>
-            <artifactId>terra-plugin-monitoring</artifactId>
-            <version>1.11</version>
+            <artifactId>selmon</artifactId>
+            <version>1.14-SNAPSHOT</version>
         </dependency>
 
         <dependency>

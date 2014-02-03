@@ -85,11 +85,11 @@
         <constructor-arg name="pluginLoader">
             <bean class="ru.yandex.qatools.terra.core.SameClasspathPluginLoader"/>
         </constructor-arg>
-        <constructor-arg name="scheduler">
-            <bean factory-bean="schedulerFactory" factory-method="getScheduler"/>
-        </constructor-arg>
         <constructor-arg name="inputUri" value="ref:events.input"/>
         <constructor-arg name="outputUri" value="direct:plugin.stop"/>
+        <property name="scheduler">
+            <bean factory-bean="schedulerFactory" factory-method="getScheduler"/>
+        </property>
         <property name="contextInjector">
             <bean class="ru.yandex.qatools.terra.core.SpringContextInjector"/>
         </property>
