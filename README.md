@@ -1,4 +1,3 @@
-# Terra embedded
+# Camelot embedded
 
-Пример того, как можно использовать встроенную терру.
-
+Example showing the way how to use the Camelot framework embedded
