@@ -1,8 +1,8 @@
-package ru.yandex.qatools.terra.example;
+package ru.yandex.qatools.camelot.example;
 
 import ru.yandex.qatools.clay.annotations.Header;
 
-import static ru.yandex.qatools.terra.api.Constants.Headers.UUID;
+import static ru.yandex.qatools.camelot.api.Constants.Headers.UUID;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)

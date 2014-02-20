@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.example;
+package ru.yandex.qatools.camelot.example;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins-config xmlns="urn:config.camelot.qatools.yandex.ru">
+    <source>
+        <artifact>test</artifact>
+        <plugin id="test-processor">
+            <processor>ru.yandex.qatools.camelot.example.TestProcessor</processor>
+        </plugin>
+        <plugin id="test-plugin" source="test-processor">
+            <aggregator>ru.yandex.qatools.camelot.example.TestAggregator</aggregator>
+            <resource>ru.yandex.qatools.camelot.example.TestResource</resource>
+        </plugin>
+    </source>
+</plugins-config>

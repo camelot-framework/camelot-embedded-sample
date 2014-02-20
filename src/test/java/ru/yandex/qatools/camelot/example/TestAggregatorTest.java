@@ -1,35 +1,35 @@
-package ru.yandex.qatools.terra.example;
+package ru.yandex.qatools.camelot.example;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import ru.yandex.qatools.camelot.api.ClientMessageSender;
+import ru.yandex.qatools.camelot.api.EndpointListener;
+import ru.yandex.qatools.camelot.test.*;
 import ru.yandex.qatools.clay.annotations.Body;
 import ru.yandex.qatools.clay.annotations.Headers;
-import ru.yandex.qatools.terra.api.ClientMessageSender;
-import ru.yandex.qatools.terra.api.EndpointListener;
-import ru.yandex.qatools.terra.test.*;
 
 import java.util.Map;
 
+import static ch.lambdaj.Lambda.having;
+import static ch.lambdaj.Lambda.on;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
+import static ru.yandex.qatools.camelot.api.Constants.Headers.UUID;
 import static ru.yandex.qatools.matchers.decorators.MatcherDecorators.should;
 import static ru.yandex.qatools.matchers.decorators.TimeoutWaiter.timeoutHasExpired;
-import static ru.yandex.qatools.terra.api.Constants.Headers.UUID;
-import static ru.yandex.qatools.terra.test.Matchers.beNotNullByKey;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)
  */
-@RunWith(TerraTestRunner.class)
-@UseCustomContext("classpath:/META-INF/spring/embedded-terra.xml")
+@RunWith(CamelotTestRunner.class)
+@UseCustomContext("classpath:/META-INF/spring/camelot-embedded.xml")
 public class TestAggregatorTest {
 
     @PluginMock(id = "test-plugin")
@@ -54,7 +54,7 @@ public class TestAggregatorTest {
     EndpointListener procListener;
 
     @Before
-    public void init(){
+    public void init() {
         helper.send("test", UUID, "uuid");
     }
 
@@ -65,13 +65,9 @@ public class TestAggregatorTest {
         verify(sender, timeout(3000)).send(any(TestState.class));
         verify(senderTopic, timeout(3000)).send(eq("testprocessed"));
 
-        // waiting until state is saved into hazelcast instance
-        assertThat(aggStates, should(beNotNullByKey(aggStates, "uuid"))
-                .whileWaitingUntil(timeoutHasExpired(SECONDS.toMillis(5))));
-
-        TestState state = aggStates.get(TestState.class, "uuid");
-        assertNotNull(state);
-        assertEquals("testprocessed", state.message);
+        assertThat("testprocessed must be in state", aggStates.get(TestState.class, "uuid"), should(having(
+                on(TestState.class).getMessage(), equalTo("testprocessed")
+        )).whileWaitingUntil(timeoutHasExpired(3000)));
     }
 
 

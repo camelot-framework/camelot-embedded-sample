@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.example;
+package ru.yandex.qatools.camelot.example;
 
 import ru.yandex.qatools.clay.annotations.Body;
 import ru.yandex.qatools.clay.annotations.FallbackProcessor;

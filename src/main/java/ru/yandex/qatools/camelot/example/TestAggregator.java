@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.example;
+package ru.yandex.qatools.camelot.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -6,10 +6,10 @@ import ru.yandex.qatools.fsm.annotations.FSM;
 import ru.yandex.qatools.fsm.annotations.OnTransit;
 import ru.yandex.qatools.fsm.annotations.Transit;
 import ru.yandex.qatools.fsm.annotations.Transitions;
-import ru.yandex.qatools.terra.api.ClientMessageSender;
-import ru.yandex.qatools.terra.api.annotations.Aggregate;
-import ru.yandex.qatools.terra.api.annotations.ClientSender;
-import ru.yandex.qatools.terra.api.annotations.Filter;
+import ru.yandex.qatools.camelot.api.ClientMessageSender;
+import ru.yandex.qatools.camelot.api.annotations.Aggregate;
+import ru.yandex.qatools.camelot.api.annotations.ClientSender;
+import ru.yandex.qatools.camelot.api.annotations.Filter;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)

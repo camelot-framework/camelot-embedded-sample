@@ -1,7 +1,7 @@
-package ru.yandex.qatools.terra.example;
+package ru.yandex.qatools.camelot.example;
 
-import ru.yandex.qatools.terra.api.AggregatorRepository;
-import ru.yandex.qatools.terra.api.annotations.Repository;
+import ru.yandex.qatools.camelot.api.AggregatorRepository;
+import ru.yandex.qatools.camelot.api.annotations.Repository;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

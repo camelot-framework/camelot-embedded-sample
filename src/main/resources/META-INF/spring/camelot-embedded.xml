@@ -16,7 +16,7 @@
             http://activemq.apache.org/schema/core/activemq-core.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="ru.yandex.qatools.terra.example"/>
+    <context:component-scan base-package="ru.yandex.qatools.camelot.example"/>
 
 
     <!-- Embedded ActiveMQ -->
@@ -79,11 +79,11 @@
 
     <!-- Embedded Terra -->
     <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/>
-    <bean id="engine" class="ru.yandex.qatools.terra.core.ProcessingEngineImpl" init-method="init">
-        <constructor-arg name="configsLocation" value="classpath*:/terra-config.xml"/>
+    <bean id="engine" class="ru.yandex.qatools.camelot.core.ProcessingEngineImpl" init-method="init">
+        <constructor-arg name="configsLocation" value="classpath*:/camelot.xml"/>
         <constructor-arg name="camelContext" ref="testContext"/>
         <constructor-arg name="pluginLoader">
-            <bean class="ru.yandex.qatools.terra.core.SameClasspathPluginLoader"/>
+            <bean class="ru.yandex.qatools.camelot.core.SameClasspathPluginLoader"/>
         </constructor-arg>
         <constructor-arg name="inputUri" value="ref:events.input"/>
         <constructor-arg name="outputUri" value="direct:plugin.stop"/>
@@ -91,10 +91,10 @@
             <bean factory-bean="schedulerFactory" factory-method="getScheduler"/>
         </property>
         <property name="contextInjector">
-            <bean class="ru.yandex.qatools.terra.core.SpringContextInjector"/>
+            <bean class="ru.yandex.qatools.camelot.core.SpringContextInjector"/>
         </property>
         <property name="buildersFactory">
-            <bean class="ru.yandex.qatools.terra.core.builders.BuildersFactoryWithHazelcastImpl">
+            <bean class="ru.yandex.qatools.camelot.core.builders.BuildersFactoryWithHazelcastImpl">
                 <constructor-arg name="hazelcastInstance" ref="hazelcastInstance"/>
             </bean>
         </property>

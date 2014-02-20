@@ -53,7 +53,7 @@
         <!-- For mvn jetty:run -->
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>ru.yandex.qatools.terra.example</param-value>
+            <param-value>ru.yandex.qatools.camelot.example</param-value>
         </init-param>
         <async-supported>true</async-supported>
         <load-on-startup>0</load-on-startup>

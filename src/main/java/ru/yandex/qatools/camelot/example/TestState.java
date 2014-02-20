@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.example;
+package ru.yandex.qatools.camelot.example;
 
 import java.io.Serializable;
 
@@ -13,5 +13,9 @@ public class TestState implements Serializable {
 
     public TestState(String message) {
         this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

@@ -1,4 +1,4 @@
-package ru.yandex.qatools.terra.example;
+package ru.yandex.qatools.camelot.example;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,17 +6,17 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
-import ru.yandex.qatools.terra.api.PluginInterop;
-import ru.yandex.qatools.terra.api.PluginsInterop;
-import ru.yandex.qatools.terra.api.annotations.Plugin;
-import ru.yandex.qatools.terra.api.annotations.Plugins;
-import ru.yandex.qatools.terra.core.ProcessingEngine;
-import ru.yandex.qatools.terra.util.AnnotatedFieldListener;
+import ru.yandex.qatools.camelot.api.PluginInterop;
+import ru.yandex.qatools.camelot.api.PluginsInterop;
+import ru.yandex.qatools.camelot.api.annotations.Plugin;
+import ru.yandex.qatools.camelot.api.annotations.Plugins;
+import ru.yandex.qatools.camelot.core.ProcessingEngine;
+import ru.yandex.qatools.camelot.util.AnnotatedFieldListener;
 
 import java.lang.reflect.Field;
 
 import static ru.yandex.qatools.clay.utils.ReflectUtil.getAnnotationValue;
-import static ru.yandex.qatools.terra.util.ServiceUtil.injectAnnotatedField;
+import static ru.yandex.qatools.camelot.util.ServiceUtil.injectAnnotatedField;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)
@@ -33,9 +33,9 @@ public class PluginsContextIntoBeansInjector implements BeanPostProcessor {
 
         final PluginsInterop interop = processingEngine.getInterop();
         try {
-            injectAnnotatedField(bean.getClass(), bean, Plugins.class, new AnnotatedFieldListener<PluginsInterop>() {
+            injectAnnotatedField(bean.getClass(), bean, Plugins.class, new AnnotatedFieldListener<PluginsInterop, Plugins>() {
                 @Override
-                public PluginsInterop found(Field field, Object annotation) throws Exception {
+                public PluginsInterop found(Field field, Plugins annotation) throws Exception {
                     return interop;
                 }
             });
@@ -43,9 +43,9 @@ public class PluginsContextIntoBeansInjector implements BeanPostProcessor {
             logger.error("Could not inject field annotated with @Plugins into bean " + bean, e);
         }
         try {
-            injectAnnotatedField(bean.getClass(), bean, Plugin.class, new AnnotatedFieldListener<PluginInterop>() {
+            injectAnnotatedField(bean.getClass(), bean, Plugin.class, new AnnotatedFieldListener<PluginInterop, Plugin>() {
                 @Override
-                public PluginInterop found(Field field, Object annotation) throws Exception {
+                public PluginInterop found(Field field, Plugin annotation) throws Exception {
                     Class pluginClass = (Class) getAnnotationValue(annotation, "value");
                     if (!pluginClass.getName().equals(Plugin.class.getName())) {
                         return interop.forPlugin(pluginClass);

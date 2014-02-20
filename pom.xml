@@ -4,37 +4,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>terra-embedded-example</groupId>
-    <artifactId>terra-embedded-example</artifactId>
+    <groupId>camelot-embedded-example</groupId>
+    <artifactId>camelot-embedded-example</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <properties>
         <java.version>1.7</java.version>
-        <terra.version>1.4.14-SNAPSHOT</terra.version>
+        <camelot.version>1.0-SNAPSHOT</camelot.version>
         <jersey.version>1.17.1</jersey.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>ru.yandex.qatools</groupId>
-            <artifactId>terra-core</artifactId>
-            <version>${terra.version}</version>
-        </dependency>
-
-        <!--
-            Т.к. мы использовали classpath*:/terra-config.xml в качестве configsLocation, то
-            подключения зависимости достаточно, чтобы добавить плагины к проекту:
-        -->
-        <dependency>
-            <groupId>ru.yandex.qatools.terra</groupId>
-            <artifactId>selmon</artifactId>
-            <version>1.14-SNAPSHOT</version>
+            <groupId>ru.yandex.qatools.camelot</groupId>
+            <artifactId>camelot-core</artifactId>
+            <version>${camelot.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>ru.yandex.qatools</groupId>
-            <artifactId>terra-test</artifactId>
-            <version>${terra.version}</version>
+            <groupId>ru.yandex.qatools.camelot</groupId>
+            <artifactId>camelot-test</artifactId>
+            <version>${camelot.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -133,9 +123,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>ru.yandex.qatools</groupId>
-                <artifactId>terra-test-maven-plugin</artifactId>
-                <version>${terra.version}</version>
+                <groupId>ru.yandex.qatools.camelot</groupId>
+                <artifactId>camelot-test-maven-plugin</artifactId>
+                <version>${camelot.version}</version>
                 <configuration>
                     <runForked>true</runForked>
                 </configuration>
