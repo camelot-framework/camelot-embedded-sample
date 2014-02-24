@@ -77,7 +77,7 @@
         </hz:config>
     </hz:hazelcast>
 
-    <!-- Embedded Terra -->
+    <!-- Embedded Camelot -->
     <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/>
     <bean id="engine" class="ru.yandex.qatools.camelot.core.ProcessingEngineImpl" init-method="init">
         <constructor-arg name="configsLocation" value="classpath*:/camelot.xml"/>
@@ -103,7 +103,7 @@
     <!-- Camel context -->
     <camelContext id="testContext" xmlns="http://camel.apache.org/schema/spring">
         <jmxAgent id="agent" disabled="true"/>
-        <threadPoolProfile id="terraDefaultProfile" defaultProfile="true" maxPoolSize="64"/>
+        <threadPoolProfile id="camelotDefaultProfile" defaultProfile="true" maxPoolSize="64"/>
         <endpoint id="events.input" uri="activemq:queue:events.input"/>
 
         <route id="stopped">
