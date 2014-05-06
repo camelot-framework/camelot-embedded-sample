@@ -10,12 +10,12 @@ import ru.yandex.qatools.camelot.api.PluginInterop;
 import ru.yandex.qatools.camelot.api.PluginsInterop;
 import ru.yandex.qatools.camelot.api.annotations.Plugin;
 import ru.yandex.qatools.camelot.api.annotations.Plugins;
+import ru.yandex.qatools.camelot.core.AnnotatedFieldListener;
 import ru.yandex.qatools.camelot.core.ProcessingEngine;
-import ru.yandex.qatools.camelot.util.AnnotatedFieldListener;
 
 import java.lang.reflect.Field;
 
-import static ru.yandex.qatools.clay.utils.ReflectUtil.getAnnotationValue;
+import static ru.yandex.qatools.camelot.util.ReflectUtil.getAnnotationValue;
 import static ru.yandex.qatools.camelot.util.ServiceUtil.injectAnnotatedField;
 
 /**

@@ -79,11 +79,11 @@
 
     <!-- Embedded Camelot -->
     <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/>
-    <bean id="engine" class="ru.yandex.qatools.camelot.core.ProcessingEngineImpl" init-method="init">
+    <bean id="engine" class="ru.yandex.qatools.camelot.core.impl.ProcessingEngineImpl" init-method="init">
         <constructor-arg name="configsLocation" value="classpath*:/camelot.xml"/>
         <constructor-arg name="camelContext" ref="testContext"/>
         <constructor-arg name="pluginLoader">
-            <bean class="ru.yandex.qatools.camelot.core.SameClasspathPluginLoader"/>
+            <bean class="ru.yandex.qatools.camelot.core.impl.SameClasspathPluginLoader"/>
         </constructor-arg>
         <constructor-arg name="inputUri" value="ref:events.input"/>
         <constructor-arg name="outputUri" value="direct:plugin.stop"/>
@@ -91,7 +91,10 @@
             <bean factory-bean="schedulerFactory" factory-method="getScheduler"/>
         </property>
         <property name="contextInjector">
-            <bean class="ru.yandex.qatools.camelot.core.SpringContextInjector"/>
+            <bean class="ru.yandex.qatools.camelot.core.impl.SpringContextInjector"/>
+        </property>
+        <property name="appConfig">
+            <bean class="ru.yandex.qatools.camelot.core.impl.AppConfigSpringProperties"/>
         </property>
         <property name="buildersFactory">
             <bean class="ru.yandex.qatools.camelot.core.builders.BuildersFactoryWithHazelcastImpl">

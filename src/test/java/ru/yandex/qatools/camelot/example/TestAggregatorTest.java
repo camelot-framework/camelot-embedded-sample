@@ -6,8 +6,6 @@ import org.junit.runner.RunWith;
 import ru.yandex.qatools.camelot.api.ClientMessageSender;
 import ru.yandex.qatools.camelot.api.EndpointListener;
 import ru.yandex.qatools.camelot.test.*;
-import ru.yandex.qatools.clay.annotations.Body;
-import ru.yandex.qatools.clay.annotations.Headers;
 
 import java.util.Map;
 
@@ -70,13 +68,12 @@ public class TestAggregatorTest {
         )).whileWaitingUntil(timeoutHasExpired(3000)));
     }
 
-
     @Test
     public void testEndpointListener() throws Exception {
         final Value<Boolean> success = new Value<>(false);
         procListener.listen(5, SECONDS, new EndpointListener.Processor<String>() {
             @Override
-            public boolean onMessage(@Body String event, @Headers Map<String, Object> headers) {
+            public boolean onMessage(String event, Map<String, Object> headers) {
                 success.set(success.get() || event.equals("testprocessed"));
                 return success.get();
             }

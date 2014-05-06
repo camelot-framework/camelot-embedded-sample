@@ -1,21 +1,19 @@
 package ru.yandex.qatools.camelot.example;
 
-import ru.yandex.qatools.clay.annotations.Body;
-import ru.yandex.qatools.clay.annotations.FallbackProcessor;
-import ru.yandex.qatools.clay.annotations.Processor;
+import ru.yandex.qatools.camelot.api.annotations.Processor;
 
 /**
  * @author: Ilya Sadykov (mailto: smecsia@yandex-team.ru)
  */
 public class TestProcessor {
 
-    @Processor(bodyType = String.class)
-    public String onNodeEvent(@Body String event) {
+    @Processor
+    public String onNodeEvent(String event) {
         return event + "processed";
     }
 
-    @FallbackProcessor
-    public Object fallback(@Body Object event) {
+    @Processor
+    public Object fallback(Object event) {
         return event;
     }
 }
