@@ -80,7 +80,7 @@
     <!-- Embedded Camelot -->
     <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/>
     <bean id="engine" class="ru.yandex.qatools.camelot.core.impl.ProcessingEngineImpl" init-method="init">
-        <constructor-arg name="configsLocation" value="classpath*:/camelot.xml"/>
+        <constructor-arg name="configResources" value="classpath*:/camelot.xml"/>
         <constructor-arg name="camelContext" ref="testContext"/>
         <constructor-arg name="pluginLoader">
             <bean class="ru.yandex.qatools.camelot.core.impl.SameClasspathPluginLoader"/>
