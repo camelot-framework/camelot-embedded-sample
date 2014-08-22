@@ -78,6 +78,13 @@
     </hz:hazelcast>
 
     <!-- Embedded Camelot -->
+    <bean id="camelotMulticastProfile" class="org.apache.camel.spi.ThreadPoolProfile">
+        <property name="id" value="camelotMulticastProfile"/>
+        <property name="timeUnit" value="MILLISECONDS"/>
+        <property name="keepAliveTime" value="30000"/>
+        <property name="poolSize" value="1"/>
+        <property name="maxPoolSize" value="5"/>
+    </bean>
     <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/>
     <bean id="engine" class="ru.yandex.qatools.camelot.core.impl.ProcessingEngineImpl" init-method="init">
         <constructor-arg name="configResources" value="classpath*:/camelot.xml"/>

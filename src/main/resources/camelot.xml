@@ -7,7 +7,6 @@
         </plugin>
         <plugin id="test-plugin" source="test-processor">
             <aggregator>ru.yandex.qatools.camelot.example.TestAggregator</aggregator>
-            <resource>ru.yandex.qatools.camelot.example.TestResource</resource>
         </plugin>
     </source>
 </plugins-config>
